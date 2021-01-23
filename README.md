@@ -1,4 +1,4 @@
-# ravenpack-front
+# pizzalovers-front
 
 Small project with frontend and backend made with django, react and redis that allows users to login, signup, vote if they like pizza and watch in realtime the top10 of pizza fans!
 
