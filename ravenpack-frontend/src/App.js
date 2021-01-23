@@ -108,19 +108,46 @@ class App extends Component {
             })
     };
 
-    handle_voting() {
-        try{
-            let response = axiosInstance.post('core/pizzalovers/',{
-                headers:{
-                    Authorization: 'JWT ' + localStorage.getItem('token')
-                }
+    handle_voting = () => {
+        //e.preventDefault();
+        console.log("asd")
+        fetch('http://localhost:8000/core/pizzalovers/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT ' + localStorage.getItem('token')
+            },
+        })
+            .then((response) =>{
+                if(!response.ok)
+                    throw Error(response.status);
+                else
+                    return response.json()})
+            .catch((error)=>{
+                alert("Voting error - expired token")
+                window.location.reload(false);
+                console.log('error: ' + error)
             })
+    };
+
+    /*handle_voting() {
+        const data={'22':'22'}
+        const options = {
+            headers: {
+                'Authorizations': 'JWT ' + localStorage.getItem('token')
+            }
+        }
+        try{
+            let response = axiosInstance.post('core/pizzalovers/', {}, {headers: {
+                    'Authorizations': 'JWT ' + localStorage.getItem('token')
+                }})
+            console.log(response.headers)
             const msg = response.data
         }catch(error){
             console.log("Error: ", JSON.stringify(error, null, 4));
             throw error;
         }
-    };
+    };*/
 
     handle_logout = () => {
         localStorage.removeItem('token');
